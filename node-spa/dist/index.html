@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro de Nomes</h1>
+        <div class="row">
+            <div class="col-6">
+                <input type="text" class="form-control" id="texto" 
+                    style="display:inline; vertical-align: middle; width:auto;">
+                <button class="btn btn-primary" id="botao">
+                    Enviar
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        <hr>
+        <h1 style="margin-top: 40px;">Lista de Nomes</h1>
+        <div class="row">
+            <div class="col-6">
+                <ul class="list-group" id="lista"></ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.onload = ()=> {
+
+            const lista = document.querySelector('#lista')
+
+            const botao = document.querySelector('#botao')
+
+            const texto = document.querySelector('#texto')
+
+            botao.addEventListener('click', create)
+
+            lista.addEventListener('click', del)
+
+            read()
+
+        }
+
+        function templateLi(id, name){
+            return `
+                <li class="list-group-item">${name}
+                    <i class="btn btn-danger delete fa fa-trash"
+                        style="float:right; margin-left: 5px;"
+                        data-id="${id}"
+                        ></i>
+                    </li>
+            `
+        }
+        function read(){
+            lista.innerHTML = ""
+
+            axios.get('/read')
+                .then((response) => {
+                    console.log(response)
+
+                    response.data.forEach(element => {
+                        lista.innerHTML += templateLi(element.id, element.name)
+                    })
+                })
+                .catch((error) =>{
+                    console.log(error)
+                })
+
+        }
+        function create(){
+
+            const name = texto.value
+            
+            axios.post('/create', {name})
+                .then((response)=> {
+                    console.log(response)
+                    lista.innerHTML += templateLi(response.data[0], name) 
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+
+
+        }
+        function edit(){
+
+        }
+        function update(){
+
+        }
+        function del(element){
+            console.log(element)
+            if (element.target.classList.contains('delete')){
+                const id = element.target.dataset.id
+
+                axios.delete(`/delete/${id}`)
+                .then((response)=> {
+                    if (response.status = 200){
+                        lista.removeChild(element.path[1])
+                    }
+                })
+                .catch((error)=> {
+                    console.log(error)
+                })
+            }
+        }
+    </script>
+</body>
+</html>

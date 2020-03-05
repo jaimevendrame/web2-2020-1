@@ -44,18 +44,25 @@
 
             lista.addEventListener('click', del)
 
+            lista.addEventListener('click', edit)
+
             read()
 
         }
 
-        function templateLi(id, name){
+        function templateLi(id, name, element = true){
             return `
-                <li class="list-group-item">${name}
-                    <i class="btn btn-danger delete fa fa-trash"
-                        style="float:right; margin-left: 5px;"
-                        data-id="${id}"
-                        ></i>
-                    </li>
+                ${element ? `<li class="list-group-item">` : ''} 
+                    ${name}
+                        <i class="btn btn-danger delete fa fa-trash"
+                            style="float:right; margin-left: 5px;"
+                            data-id="${id}"
+                            ></i>
+                        <i class="btn btn-primary update fa fa-wrench"
+                            style="float:right;"
+                            data-id="${id}"
+                            ></i>
+                ${element ? `</li>` : ''}
             `
         }
         function read(){
@@ -89,12 +96,39 @@
 
 
         }
-        function edit(){
+        function edit(element){
+            if (element.target.classList.contains('update')){
 
-        }
-        function update(){
+                const input = document.createElement('input')
 
+                input.type = 'text'
+                input.setAttribute('value', '')
+
+                const pai = element.target.parentElement
+                const id = element.target.dataset.id
+                
+                pai.innerHTML = ''
+                pai.appendChild(input)
+                
+                input.addEventListener('keydown', update.bind(pai, id, input))
+                input.focus()
+            }
         }
+        function update(id, input){
+            const x = event.key
+            if ( x == null || x != 'Enter') return
+
+            axios.put(`/update/${id}`, { name: input.value })
+                .then((response)=> {
+                    if (response.status = 200){
+                        this.innerHTML = templateLi(id, input.value, false)
+                    }
+                })
+                .catch((error)=> {
+                    console.log(error)
+                })
+        }
+
         function del(element){
             console.log(element)
             if (element.target.classList.contains('delete')){

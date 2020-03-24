@@ -1,0 +1,26 @@
+body {
+    background-color: cadetblue;
+}
+
+.demo-card-wide.mdl-card {
+margin: 10px;
+}
+
+.demo-card-wide > .mdl-card__menu {
+    color: black;
+}
+
+.add {
+    position: fixed;
+    right: 40px;
+    bottom: 25px;
+    background: red !important;
+    z-index: 3;
+}
+
+.spinner-position {
+    position: fixed;
+    right: 55px;
+    bottom: 100px;
+    z-index: 3;
+}

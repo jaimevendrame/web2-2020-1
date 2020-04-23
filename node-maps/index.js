@@ -8,9 +8,10 @@ const knex = require('knex')({
         database: 'maps'
     }
 })
+const chave = 'AIzaSyDgZ6HnSzsmTpaP2fIfwP7Rz8xiawPYi5I'
 
 const googleMapsClient = require('@google/maps').createClient({
-    key:'sua chave',
+    key:chave,
     Promise: Promise
 })
 
@@ -41,7 +42,7 @@ googleMapsClient.reverseGeocode({latlng: [lat,lng]}).asPromise()
         const address = response.json.results[0].formatted_address
         const place_id = response.json.results[0].place_id
 
-        const image =`https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=13&size=300x300&sensor=false&key=suachave`
+        const image =`https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=13&size=300x300&sensor=false&key=${chave}`
 
 
         knex('places')

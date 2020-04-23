@@ -1,0 +1,40 @@
+extends layout
+
+block main
+
+  .container
+
+    .row(style="margin-bottom: 30px;")
+      .col
+        .card
+          .card-body
+            h1 Cadastro de Clientes
+
+            .form-group
+              label(for="nome") Nome
+              input(type="text", id="nome", class="form-control")
+
+            .form-group
+              .form-check.form-check-inline
+                input(type="radio", id="masculino", class="form-check-input", name="sexo", data-value="1")
+                label(for="masculino", class="form-check-label") Masculino
+
+              .form-check.form-check-inline
+                input(type="radio", id="feminino", class="form-check-input", name="sexo", data-value="2")
+                label(for="feminino", class="form-check-label") Feminino
+
+            button(class="btn btn-primary", id="cadastrar") Cadastrar
+
+    .row(style="margin-bottom: 30px;")
+      .col-6
+        .card
+          .card-body
+            canvas(id="sexoChart")
+
+      .col-6
+        .card
+          .card-body
+            canvas(id="dataChart")
+
+    .refresh.btn.btn-primary(id="refresh")
+      img(src="refresh.png")

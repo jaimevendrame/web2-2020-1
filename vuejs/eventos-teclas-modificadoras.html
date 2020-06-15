@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos Teclas Modificadoras Vue Js</title>
+</head>
+<body>
+    <div id="app">
+        <div @click.alt.exact="testeEvents">
+            Clique aqui
+        </div>
+        <input v-on:keyup.alt.67="testeEvents">
+    </div>
+    
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data: {
+            
+        },
+        methods: {
+            testeEvents (){
+                alert('teste')
+            },
+           
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renderização Condicional</title>
+</head>
+<body>
+    <div id="app">
+        <div v-if="number > 13">
+            {{ textExemplo }}
+        </div>
+        <div v-else-if="number == 13">
+            é igual
+        </div>
+        <div v-else>
+            é diferente
+        </div>
+        <div v-if="isActive">
+            {{ textExemplo }} 2
+        </div>
+
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data: {
+                textExemplo: 'Texto de Exemplo',
+                number: 13,
+                isActive: false
+
+            }
+        })
+    </script>
+</body>
+</html>

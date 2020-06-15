@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propriedade Computada Vue JS</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <input type="text" @keyup="changeValue">
+        <p>{{ texto }}</p>
+        <p>{{ reverse }}</p>
+
+
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                texto: ''
+
+            },
+            computed:{
+                reverse(){
+                    return this.texto.split('').reverse().join('')
+                }
+            },
+            methods: {
+                changeValue(event) {
+                    this.texto = event.target.value
+                },
+            }
+        })
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-html</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{title}}</h1>
+        <div v-html="description">
+            
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script> 
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            title: 'V-Html',
+            description: '<strong>Conteúdo do artigo </strong>'
+        }
+    })
+</script>   
+</body>
+</html>

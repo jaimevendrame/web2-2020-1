@@ -9,8 +9,11 @@
             <img src="../assets/preloader.gif" alt="Carregando...">
             Carregando...
         </div>
+        <div v-if="error != ''">
+            {{ error }}
+        </div>
 
-        <div v-show = "address.bairro != ''">
+        <div v-show = "address.bairro">
             <p><b>Logradouro: </b> {{ address.logradouro }} </p>
             <p><b>Bairro: </b> {{ address.bairro }} </p>
             <p><b>Cidade: </b> {{ address.cidade }} </p>
@@ -26,25 +29,35 @@ export default {
             title: 'Buscar CEP com Vue JS',
             cep: '',
             address: {
-                bairro: ''
+                
             },
-            preloader: false
+            preloader: false,
+            error: ''
         }
     },
     methods: {
         onSubmit () {
-            this.preloader = true
+            this.preloader = true,
+            // this.error = '',
+            // this.address = {bairro: ''}
+            this.reset(),
             this.$http.get('https://api.postmon.com.br/v1/cep/' + this.cep)
             .then( response => {
                 this.address = response.body
                 
             }, error => {
                 console.log(error)
+
+                this.error = 'Cep Errado!'
                 
             })
             .finally(() => {
                 this.preloader = false
             })
+        },
+        reset (){
+            this.error = '',
+            this.address = {}
         }
     }
 }

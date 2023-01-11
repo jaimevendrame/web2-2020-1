@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
-    "knex": "^0.20.10",
+    "knex": "^2.4.0",
     "mysql": "^2.18.1",
     "restify": "^8.5.1",
     "restify-errors": "^8.0.2"

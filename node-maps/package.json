@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@google/maps": "^1.1.0",
-    "knex": "^0.20.11",
+    "knex": "^2.4.0",
     "mysql": "^2.18.1",
     "restify": "^8.5.1"
   }
